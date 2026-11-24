@@ -1,0 +1,7 @@
+---
+import Profile from '../../components/GovernmentProfile.astro';
+import governments from '../../data/governments.json';
+export function getStaticPaths(){return governments.map(g=>({params:{id:g.id},props:{g}}));}
+const {g}=Astro.props;
+---
+<Profile g={g} lang="en" />

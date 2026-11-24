@@ -1,0 +1,74 @@
+[
+  {
+    "id": "austin",
+    "name": "Austin",
+    "type": "CITY",
+    "count": 114,
+    "principal": 7657632000,
+    "interest": 3976143533,
+    "repayment": 11633775533
+  },
+  {
+    "id": "lampasas-county",
+    "name": "Lampasas County",
+    "type": "COUNTY",
+    "count": 2,
+    "principal": 13950000,
+    "interest": 3949600,
+    "repayment": 17899600
+  },
+  {
+    "id": "copperas-cove",
+    "name": "Copperas Cove",
+    "type": "CITY",
+    "count": 18,
+    "principal": 110305000,
+    "interest": 37189495,
+    "repayment": 147494495
+  },
+  {
+    "id": "gatesville-isd",
+    "name": "Gatesville ISD",
+    "type": "ISD",
+    "count": 3,
+    "principal": 16045000,
+    "interest": 2961104,
+    "repayment": 19006104
+  },
+  {
+    "id": "gatesville",
+    "name": "Gatesville",
+    "type": "CITY",
+    "count": 6,
+    "principal": 19535000,
+    "interest": 2532186,
+    "repayment": 22067186
+  },
+  {
+    "id": "bell-county",
+    "name": "Bell County",
+    "type": "COUNTY",
+    "count": 7,
+    "principal": 109355000,
+    "interest": 20572799,
+    "repayment": 129927799
+  },
+  {
+    "id": "coryell-county",
+    "name": "Coryell County",
+    "type": "COUNTY",
+    "count": 2,
+    "principal": 6385000,
+    "interest": 665405,
+    "repayment": 7050405
+  },
+  {
+    "id": "copperas-cove-isd",
+    "name": "Copperas Cove ISD",
+    "type": "ISD",
+    "count": null,
+    "principal": null,
+    "interest": null,
+    "repayment": null
+  }
+]
