@@ -1,0 +1,1 @@
+Texas Capitol night.jpg, Larry D. Moore, CC BY 4.0. https://commons.wikimedia.org/wiki/File:Texas_Capitol_night.jpg . Displayed with CSS crop and dark overlay. Remote image with local vector fallback; availability not yet verified in production.
