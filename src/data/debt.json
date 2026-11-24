@@ -1,0 +1,28 @@
+{
+  "year": 2025,
+  "asOf": "2025-08-31",
+  "state": {
+    "principal": 77051105337,
+    "go": 16213495000,
+    "revenue": 60837610337,
+    "source": "https://data.brb.texas.gov/state/"
+  },
+  "local": {
+    "principal": 365500296024,
+    "tax": 256421089736,
+    "revenue": 109079206288,
+    "source": "https://data.brb.texas.gov/local/"
+  },
+  "discrepancies": [
+    {
+      "id": "TX-001",
+      "source": "https://www.brb.texas.gov/wp-content/uploads/2026/04/DAS2026.pdf",
+      "note": "State study Figure 2.2 reports $77.898185 billion and Figure 2.3 reports $81.31 billion; dashboard reports $77.051105337 billion."
+    },
+    {
+      "id": "TX-002",
+      "source": "https://www.brb.texas.gov/wp-content/uploads/2026/02/2025LocalARFinal.pdf",
+      "note": "Local report executive summary reports $368.30 billion; dashboard reports $365.500296024 billion. Scope/revision unresolved."
+    }
+  ]
+}
