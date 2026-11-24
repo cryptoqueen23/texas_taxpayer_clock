@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS sources (source_id VARCHAR PRIMARY KEY, url VARCHAR NOT NULL, retrieved_at TIMESTAMP, sha256 VARCHAR, reporting_period VARCHAR);
+CREATE TABLE IF NOT EXISTS governments (government_id VARCHAR PRIMARY KEY, name VARCHAR NOT NULL, government_type VARCHAR NOT NULL);
+CREATE TABLE IF NOT EXISTS observations (government_id VARCHAR REFERENCES governments(government_id), metric VARCHAR NOT NULL, period VARCHAR NOT NULL, amount DECIMAL(24,2), unit VARCHAR NOT NULL, status VARCHAR NOT NULL CHECK(status IN ('reported','provisional','modeled','unavailable')), source_id VARCHAR REFERENCES sources(source_id), CHECK(status <> 'unavailable' OR amount IS NULL), CHECK(status = 'unavailable' OR (amount IS NOT NULL AND source_id IS NOT NULL)));
+CREATE TABLE IF NOT EXISTS audit_log (issue_id VARCHAR PRIMARY KEY, description VARCHAR NOT NULL, status VARCHAR NOT NULL);

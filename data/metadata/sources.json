@@ -1,0 +1,17 @@
+[
+  {
+    "id": "brb",
+    "url": "https://www.brb.texas.gov/",
+    "status": "reference"
+  },
+  {
+    "id": "property-tax",
+    "url": "https://comptroller.texas.gov/taxes/property-tax/rates/index.php",
+    "status": "reference"
+  },
+  {
+    "id": "property-dashboard",
+    "url": "https://comptroller.texas.gov/transparency/open-data/tableau/property-tax-rates.php",
+    "status": "reference"
+  }
+]
