@@ -1,21 +1,31 @@
 name: Import statewide property tax rates
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - public/data/tax-units.json
 permissions:
-  contents: write
+  contents: read
 jobs:
-  import:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - run: pip install openpyxl
-      - run: python scripts/import-tax-units.py
-      - run: |
-          git config user.name "Texas Taxpayer Clock data bot"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/data/tax-units.json
-          git diff --cached --quiet || git commit -m "Import official statewide tax rate directory"
-          git push
+      - name: Validate locally prepared official data
+        run: |
+          python - <<'PY'
+          import json,re
+          from pathlib import Path
+          p=Path('public/data/tax-units.json')
+          if not p.exists():
+              raise SystemExit('Upload the locally validated tax-units.json to public/data/ first.')
+          rows=json.loads(p.read_text())
+          ids=[r['id'] for r in rows]
+          assert len(ids)==len(set(ids)) and len(ids)>=4862
+          assert sum(i.endswith('-000-00') for i in ids)==254
+          for r in rows:
+              assert re.fullmatch(r'\d{3}-\d{3}-\d{2}',r['id'])
+              assert r['name'] and r['rates']
+              assert all(y in {'2021','2022','2023','2024','2025'} and (v is None or isinstance(v,(int,float)) and v>=0) for y,v in r['rates'].items())
+          print(f'Validated {len(rows)} taxing units and 254 counties')
+          PY
