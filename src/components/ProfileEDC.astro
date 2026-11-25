@@ -1,0 +1,12 @@
+---
+import data from '../../public/data/edc-history-1997-2024.json';
+const {g,lang}=Astro.props;
+const es=lang==='es',t=(a:string,b:string)=>es?b:a;
+const norm=(s:string)=>s.trim().replace(/^city of\s+/i,'').replace(/\s+\(.*\)$/,'').toLowerCase();
+const city=norm(g.name);
+const matches=Object.entries(data.years).sort(([a],[b])=>b.localeCompare(a)).flatMap(([year,rows])=>rows.filter(r=>typeof r[0]==='string'&&norm(r[0])===city).map(r=>({year,r})));
+const latest=new Map<string,typeof matches[number]>();
+for(const x of matches){const key=JSON.stringify(x.r.slice(0,3));if(!latest.has(key))latest.set(key,x);}
+const money=(v:any)=>typeof v==='number'&&Number.isFinite(v)?v.toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}):t('Unavailable','No disponible');
+---
+<section><h2>{t('Economic development corporations','Corporaciones de desarrollo económico')}</h2><p>{t('Historical records matched by reported headquarters city name, not a verified legal affiliation or shared identifier.','Registros históricos vinculados por nombre de ciudad sede, no por afiliación legal verificada ni identificador compartido.')}</p>{[...latest.values()].map(({year,r})=><article><h3>{r[2]} · {r[1]}</h3><p>{year}{year==='2024'?t(' · Partial statewide coverage',' · Cobertura estatal parcial'):''}</p><p>{t('Reported expenditures','Gastos reportados')}</p><strong>{money(r[10])}</strong><p>{t('Sales tax revenue','Ingresos de impuesto sobre ventas')}: {money(r[7])}</p><p>{t('Total revenue','Ingresos totales')}: {money(r[9])}</p><p>{t('Reported cash balance','Saldo de efectivo reportado')}: {money(r[11])}</p></article>)}{latest.size===0&&<p>{t('No matching headquarters city in historical data. This does not establish that no EDC exists.','Sin coincidencia de ciudad sede en datos históricos. Esto no demuestra que no exista una EDC.')}</p>}<p>{t('Do not add these amounts to municipal totals: sales taxes and transfers may overlap. Cash is not necessarily unrestricted.','No sumar a totales municipales: impuestos y transferencias pueden superponerse. Efectivo no necesariamente disponible.')}</p><a href={(es?'/es':'')+'/edc-history/?q='+encodeURIComponent(g.name.replace(/^city of\s+/i,''))}>{t('Explore historical EDC records','Explorar registros históricos de EDC')}</a></section>

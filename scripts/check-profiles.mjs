@@ -89,3 +89,5 @@ assert.equal(edcHistory.years['2024'].length,422);
 assert(edcHistory.partialYears.includes('2024'));
 for(const rows of Object.values(edcHistory.years)){assert.equal(new Set(rows.map(r=>JSON.stringify(r.slice(0,3)))).size,rows.length);assert(rows.every(r=>r.length===12));}
 for(const prefix of ['','es/'])assert(fs.existsSync('dist/'+prefix+'edc-history/index.html'));
+
+assert(fs.readFileSync('dist/government/copperas-cove/index.html','utf8').includes('Copperas Cove Economic Development Corporation'));
