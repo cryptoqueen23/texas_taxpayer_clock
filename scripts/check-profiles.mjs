@@ -102,3 +102,5 @@ const pensionHistory=JSON.parse(fs.readFileSync('public/data/texas-pension-histo
 assert.equal(Object.values(pensionHistory.datasets).reduce((n,d)=>n+d.records.length,0),6513);
 assert.equal(pensionHistory.datasets.actuarial.fields[7],'Actuarial Accrued Liability ($)');
 for(const prefix of ['','es/'])assert(fs.existsSync('dist/'+prefix+'pensions/index.html'));
+
+for(const prefix of ['','es/'])assert(fs.existsSync('dist/'+prefix+'household-burden/index.html'));
