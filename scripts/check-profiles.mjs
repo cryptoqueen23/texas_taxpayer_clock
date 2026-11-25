@@ -97,3 +97,8 @@ assert.equal(censusLocal.units,'thousands of dollars');
 assert.equal(Object.keys(censusLocal.years['2022']).length,1461);
 assert.equal(Object.keys(censusLocal.years['2024']).length,221);
 for(const prefix of ['','es/'])assert(fs.existsSync('dist/'+prefix+'local-finances/index.html'));
+
+const pensionHistory=JSON.parse(fs.readFileSync('public/data/texas-pension-history.json','utf8'));
+assert.equal(Object.values(pensionHistory.datasets).reduce((n,d)=>n+d.records.length,0),6513);
+assert.equal(pensionHistory.datasets.actuarial.fields[7],'Actuarial Accrued Liability ($)');
+for(const prefix of ['','es/'])assert(fs.existsSync('dist/'+prefix+'pensions/index.html'));
