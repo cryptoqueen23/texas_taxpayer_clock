@@ -65,3 +65,8 @@ const sales=JSON.parse(fs.readFileSync('public/data/local-sales-tax-2026-11.json
 const salesHistory=JSON.parse(fs.readFileSync('public/data/local-sales-tax-history.json','utf8'));const historyByKey=new Map(salesHistory.records.map(r=>[JSON.stringify(r.slice(0,3)),r[3]]));assert.equal(historyByKey.size,salesHistory.records.length);for(const r of salesHistory.records)for(const [p,v] of Object.entries(r[3])){assert(/^20(1[3-9]|2[0-6])-(11|12)$/.test(p));assert(p!=='2026-12');assert(Number.isSafeInteger(v));}for(const r of sales.records)assert.equal(historyByKey.get(JSON.stringify([r[0],r[1],r[2]??'']))?.['2026-11'],r[6]);for(const prefix of ['','es/'])assert(fs.existsSync('dist/'+prefix+'local-sales-tax-history/index.html'));
 
 const salesCrosswalk=JSON.parse(fs.readFileSync('src/data/sales-tax-crosswalk.json','utf8'));const salesKeys=new Set(sales.records.map(r=>JSON.stringify(r.slice(0,3))));for(const [id,k] of Object.entries(salesCrosswalk)){assert(ids.has(id));assert(salesKeys.has(JSON.stringify(k)));}assert.equal(salesCrosswalk['050-101-03'][1],'Copperas Cove');
+
+const schoolLevies=JSON.parse(fs.readFileSync('public/data/school-levies-2021-2025.json','utf8'));
+assert.deepEqual(Object.keys(schoolLevies.years).sort(),['2021','2022','2023','2024','2025']);
+for(const [year,rows] of Object.entries(schoolLevies.years)){assert.equal(Object.keys(rows).length,({'2021':1015,'2022':1014,'2023':1014,'2024':1013,'2025':1013})[year]);for(const [id,r] of Object.entries(rows)){assert(/^\d{3}-\d{3}-02$/.test(id));assert.equal(r.length,5);assert(typeof r[0]==='string');assert(r.slice(1).every(v=>v===null||Number.isFinite(v)));}}
+assert.equal(schoolLevies.years['2025']['050-910-02'][4],14511511);
