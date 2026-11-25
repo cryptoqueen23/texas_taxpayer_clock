@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 const root=path.resolve('dist');
-const routes=['','revenue','debt','tax-rates','calculator','county-map','local-sales-tax','local-sales-tax-history','government/copperas-cove','government/copperas-cove-isd','government/coryell-county','school-rankings','school-spending','appraisal-districts','economic-development','edc-history','local-finances','pensions','household-burden','methodology','support','watchlist','compare','unmatched-debt'];
+const routes=['','revenue','debt','tax-rates','calculator','county-map','local-sales-tax','local-sales-tax-history','government/copperas-cove','government/copperas-cove-isd','government/coryell-county','school-rankings','school-spending','appraisal-districts','economic-development','edc-history','local-finances','pensions','household-burden','methodology','support','watchlist','compare','unmatched-debt','evidence'];
 let checked=0;const errors=[];
 for(const lang of ['en','es'])for(const route of routes){
  const relative=[lang==='es'?'es':'',route].filter(Boolean).join('/');
@@ -58,3 +58,10 @@ for(const prefix of ['','es/']){
  assert(fs.readFileSync(path.join(root,prefix,'index.html'),'utf8').includes('/'+prefix+'unmatched-debt/'));
 }
 console.log('Unmatched debt directory reconciliation and bilingual navigation passed');
+
+for(const prefix of ['','es/']){
+ const html=fs.readFileSync(path.join(root,prefix,'evidence/index.html'),'utf8');
+ for(const value of ['365,500,296,028','195,978,007,362','561,478,303,383','46,273,916,218',debt.sourceSha256,'SUM(records.principal)','/data/local-debt-2025.json'])assert(html.includes(value),value);
+ assert(fs.readFileSync(path.join(root,prefix,'index.html'),'utf8').includes('/'+prefix+'evidence/'));
+}
+console.log('Bilingual financial evidence checks passed');
