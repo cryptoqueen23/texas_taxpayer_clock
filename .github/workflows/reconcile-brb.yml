@@ -6,6 +6,7 @@ on:
     paths:
       - 'scripts/reconcile-brb.py'
       - 'scripts/test-reconcile-brb.py'
+      - 'scripts/verify-brb-evidence.py'
       - '.github/workflows/reconcile-brb.yml'
 permissions:
   contents: read
@@ -20,7 +21,9 @@ jobs:
           python-version: '3.12'
       - run: python scripts/validate-financial-evidence.py
       - run: python scripts/test-reconcile-brb.py
+      - run: python scripts/verify-brb-evidence.py --test
       - run: python scripts/reconcile-brb.py
+      - run: python scripts/verify-brb-evidence.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
