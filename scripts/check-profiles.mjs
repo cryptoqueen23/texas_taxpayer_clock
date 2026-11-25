@@ -104,3 +104,10 @@ assert.equal(pensionHistory.datasets.actuarial.fields[7],'Actuarial Accrued Liab
 for(const prefix of ['','es/'])assert(fs.existsSync('dist/'+prefix+'pensions/index.html'));
 
 for(const prefix of ['','es/'])assert(fs.existsSync('dist/'+prefix+'household-burden/index.html'));
+
+// Phase 18B: source schema and units
+assert.equal(pensionHistory.datasets.actuarial.fields[8],'Actuarial Value of Assets ($)');
+assert.equal(pensionHistory.datasets.actuarial.fields[9],'Funded Ratio (Actuarial Value of Assets)');
+assert.equal(pensionHistory.datasets.actuarial.fields[16],'Actual Employer Contribution (% of Payroll)');
+const auditCensus=JSON.parse(fs.readFileSync('public/data/texas-census-local-finance-2022-2024.json','utf8'));
+assert(Object.values(auditCensus.years['2022']).some(r=>r.name==='COPPERAS COVE CITY'&&r.county==='Coryell'));
