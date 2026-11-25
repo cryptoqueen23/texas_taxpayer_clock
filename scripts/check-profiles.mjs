@@ -53,3 +53,5 @@ console.log('Historical dataset reconciled with FY2025 debt records');
 
 const denominators=JSON.parse(fs.readFileSync('public/data/local-debt-denominators-2025.json','utf8'));
 assert.equal(denominators.fiscalYear,2025);assert.equal(denominators.sourceSha256,debt.sourceSha256);assert.deepEqual(denominators.fields,['Population','StudentHeadcount','TaxableValue','BudgetedTotalExpenditures','ADA']);assert.equal(Object.keys(denominators.records).length,debt.records.length);for(const r of debt.records){const v=denominators.records[r.id];assert.equal(v.length,5);assert(v.every(n=>n===null||(Number.isFinite(n)&&n>=0)));}
+
+const geo=JSON.parse(fs.readFileSync('public/data/texas-county-boundaries-2025.json','utf8'));assert.equal(geo.counties.length,254);assert.equal(new Set(geo.counties.map(c=>c.taxId)).size,254);for(const c of geo.counties){assert(ids.has(c.taxId));assert.match(c.fips,/^48\d{3}$/);assert(c.path.startsWith('M'));}for(const prefix of ['','es/'])assert(fs.existsSync('dist/'+prefix+'county-map/index.html'));
