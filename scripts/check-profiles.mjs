@@ -82,3 +82,10 @@ assert.equal(appraisal.years['2025'].Coryell.budget,1491786);
 for(const prefix of ['','es/'])assert(fs.existsSync('dist/'+prefix+'appraisal-districts/index.html'));
 
 for(const prefix of ['','es/'])assert(fs.existsSync('dist/'+prefix+'economic-development/index.html'));
+
+const edcHistory=JSON.parse(fs.readFileSync('public/data/edc-history-1997-2024.json','utf8'));
+assert.equal(Object.values(edcHistory.years).flat().length,17448);
+assert.equal(edcHistory.years['2024'].length,422);
+assert(edcHistory.partialYears.includes('2024'));
+for(const rows of Object.values(edcHistory.years)){assert.equal(new Set(rows.map(r=>JSON.stringify(r.slice(0,3)))).size,rows.length);assert(rows.every(r=>r.length===12));}
+for(const prefix of ['','es/'])assert(fs.existsSync('dist/'+prefix+'edc-history/index.html'));
