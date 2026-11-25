@@ -1,0 +1,12 @@
+---
+import sales from '../../public/data/local-sales-tax-2026-11.json';
+import history from '../../public/data/local-sales-tax-history.json';
+import crosswalk from '../data/sales-tax-crosswalk.json';
+const {g,lang}=Astro.props;const es=lang==='es',t=(a:string,b:string)=>es?b:a;
+const key=(crosswalk as Record<string,(string|null)[]>)[g.taxId];
+const same=(r:any[])=>key&&r[0]===key[0]&&r[1]===key[1]&&(r[2]??'')===(key[2]??'');
+const row=sales.records.find(same);
+const hist=history.records.find(same)?.[3] as Record<string,number>|undefined;
+const money=(v:number)=>new Intl.NumberFormat(es?'es-US':'en-US',{style:'currency',currency:'USD'}).format(v/100);
+---
+<section><h2>{t('Local sales tax allocations','Asignaciones locales de impuestos sobre ventas')}</h2>{row?<><p>{t('November 2026 · matched by government type, exact name and county code where applicable. Allocations are not total revenue.','Noviembre de 2026 · coincidencia por tipo, nombre exacto y código de condado cuando corresponde. Las asignaciones no son ingresos totales.')}</p><article><h3>{t('November payment','Pago de noviembre')}</h3><strong>{money(Number(row[4]))}</strong><p>{t('Prior November','Noviembre anterior')}: {money(Number(row[5]))}</p></article><article><h3>{t('January–November 2026','Enero–noviembre de 2026')}</h3><strong>{money(Number(row[6]))}</strong><p>{t('Prior comparable period','Período anterior comparable')}: {money(Number(row[7]))}</p><p>{t('Reported local sales tax rate','Tasa local reportada')}: {row[3]}%</p></article>{hist&&<details><summary>{t('Historical annual allocations','Asignaciones anuales históricas')}</summary><table style="width:100%;text-align:left"><thead><tr><th>{t('Calendar year','Año calendario')}</th><th>{t('December YTD','Acumulado a diciembre')}</th></tr></thead><tbody>{Array.from({length:13},(_,i)=>2013+i).map(y=><tr><th scope="row">{y}</th><td>{hist[y+'-12']==null?'—':money(hist[y+'-12'])}</td></tr>)}</tbody></table></details>}</>:<p>{t('No conservative match in the allocation dataset. This does not establish zero revenue.','Sin coincidencia conservadora en los datos de asignaciones. Esto no demuestra ingresos cero.')}</p>}<p><a href={es?'/es/local-sales-tax/':'/local-sales-tax/'}>{t('Current allocation explorer','Explorador de asignaciones actuales')}</a> · <a href={es?'/es/local-sales-tax-history/':'/local-sales-tax-history/'}>{t('Historical explorer','Explorador histórico')}</a></p></section>
