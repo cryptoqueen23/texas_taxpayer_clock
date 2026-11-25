@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 const root=path.resolve('dist');
-const routes=['','revenue','debt','tax-rates','calculator','county-map','local-sales-tax','local-sales-tax-history','government/copperas-cove','government/copperas-cove-isd','government/coryell-county','school-rankings','school-spending','appraisal-districts','economic-development','edc-history','local-finances','pensions','household-burden','methodology','support','watchlist','compare'];
+const routes=['','revenue','debt','tax-rates','calculator','county-map','local-sales-tax','local-sales-tax-history','government/copperas-cove','government/copperas-cove-isd','government/coryell-county','school-rankings','school-spending','appraisal-districts','economic-development','edc-history','local-finances','pensions','household-burden','methodology','support','watchlist','compare','unmatched-debt'];
 let checked=0;const errors=[];
 for(const lang of ['en','es'])for(const route of routes){
  const relative=[lang==='es'?'es':'',route].filter(Boolean).join('/');
@@ -42,3 +42,19 @@ for(const lang of ['en','es']){
  }
 }
 console.log('Bilingual comparison regression checks passed');
+
+const units=JSON.parse(fs.readFileSync('public/data/tax-units.json','utf8'));
+const debt=JSON.parse(fs.readFileSync('public/data/local-debt-2025.json','utf8'));
+const ids=new Set(units.map(r=>r.id));
+const unmatched=debt.records.filter(r=>!ids.has(r.id));
+assert.equal(unmatched.length,225);
+assert.equal(unmatched.reduce((s,r)=>s+r.principal,0),46273916218);
+for(const prefix of ['','es/']){
+ const html=fs.readFileSync(path.join(root,prefix,'unmatched-debt/index.html'),'utf8');
+ assert.equal((html.match(/<tbody>[\s\S]*?<\/tbody>/)?.[0].match(/<tr(?:\s|>)/g)||[]).length,unmatched.length);
+ for(const r of unmatched)assert(html.includes(r.id),r.id);
+ assert(html.includes('46,273,916,218'));
+ assert(/<label[^>]*for="filter"/.test(html));
+ assert(fs.readFileSync(path.join(root,prefix,'index.html'),'utf8').includes('/'+prefix+'unmatched-debt/'));
+}
+console.log('Unmatched debt directory reconciliation and bilingual navigation passed');
