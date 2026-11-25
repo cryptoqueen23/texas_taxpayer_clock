@@ -18,8 +18,26 @@ for name,id in SOURCES.items():
         meta_url=f"https://data.texas.gov/api/views/{id}.json"
         before=json.loads(fetch(meta_url,5_000_000))
         if before.get("id")!=id: raise ValueError("Dataset identity mismatch")
-        url=f"https://data.texas.gov/api/views/{id}/rows.csv?accessType=DOWNLOAD"
-        raw=fetch(url,100_000_000)
+        url=f"https://data.texas.gov/resource/{id}.csv?$limit=50000&$order=:id"
+        chunks=[]
+        offset=0
+        header_line=None
+        while True:
+            page=fetch(url+f"&$offset={offset}",50_000_000)
+            lines=list(csv.reader(page.decode("utf-8-sig").splitlines(keepends=True)))
+            if not lines: raise ValueError("Empty response")
+            if header_line is None: header_line=lines[0]
+            if lines[0]!=header_line: raise ValueError("Header changed between pages")
+            chunks.extend(lines[1:])
+            if len(lines)-1<50000: break
+            offset+=50000
+            if offset>1000000: raise ValueError("Row limit exceeded")
+        import io
+        buf=io.StringIO(newline="")
+        writer=csv.writer(buf)
+        writer.writerow(header_line)
+        writer.writerows(chunks)
+        raw=buf.getvalue().encode("utf-8")
         if raw.lstrip().startswith((b"<",b"{")): raise ValueError("Not CSV")
         file=ROOT/(name+".csv")
         file.write_bytes(raw)
