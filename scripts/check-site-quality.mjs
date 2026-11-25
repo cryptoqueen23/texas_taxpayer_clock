@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 const root=path.resolve('dist');
-const routes=['','revenue','debt','tax-rates','calculator','county-map','local-sales-tax','local-sales-tax-history','government/copperas-cove','government/copperas-cove-isd','government/coryell-county','school-rankings','school-spending','appraisal-districts','economic-development','edc-history','local-finances','pensions','household-burden'];
+const routes=['','revenue','debt','tax-rates','calculator','county-map','local-sales-tax','local-sales-tax-history','government/copperas-cove','government/copperas-cove-isd','government/coryell-county','school-rankings','school-spending','appraisal-districts','economic-development','edc-history','local-finances','pensions','household-burden','methodology'];
 let checked=0;const errors=[];
 for(const lang of ['en','es'])for(const route of routes){
  const relative=[lang==='es'?'es':'',route].filter(Boolean).join('/');
