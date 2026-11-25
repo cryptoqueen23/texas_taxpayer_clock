@@ -91,3 +91,9 @@ for(const rows of Object.values(edcHistory.years)){assert.equal(new Set(rows.map
 for(const prefix of ['','es/'])assert(fs.existsSync('dist/'+prefix+'edc-history/index.html'));
 
 assert(fs.readFileSync('dist/government/copperas-cove/index.html','utf8').includes('Copperas Cove Economic Development Corporation'));
+
+const censusLocal=JSON.parse(fs.readFileSync('public/data/texas-census-local-finance-2022-2024.json','utf8'));
+assert.equal(censusLocal.units,'thousands of dollars');
+assert.equal(Object.keys(censusLocal.years['2022']).length,1461);
+assert.equal(Object.keys(censusLocal.years['2024']).length,221);
+for(const prefix of ['','es/'])assert(fs.existsSync('dist/'+prefix+'local-finances/index.html'));
