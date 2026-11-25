@@ -25,3 +25,18 @@ for(const id of ['copperas-cove','copperas-cove-isd','austin','coryell-county'])
  assert(html.includes('Historical property tax rates'));
 }
 console.log('Verified '+rows.length*2+' bilingual profile routes; SHA256 '+crypto.createHash('sha256').update(raw).digest('hex'));
+
+const debt=JSON.parse(fs.readFileSync('public/data/local-debt-2025.json','utf8'));
+assert.equal(debt.fiscalYear,2025);
+assert.equal(debt.records.length,3319);
+assert.equal(new Set(debt.records.map(r=>r.id)).size,3319);
+for(const r of debt.records) for(const k of ['count','principal','interest','repayment']) assert(Number.isSafeInteger(r[k])&&r[k]>=0);
+for(const [k,v] of Object.entries({count:17718,principal:365500296028,interest:195978007362,repayment:561478303383})) assert.equal(debt.records.reduce((s,r)=>s+r[k],0),v);
+const ids=new Set(rows.map(r=>r.id));
+const matched=debt.records.filter(r=>ids.has(r.id));
+assert.equal(matched.length,3094);
+for(const r of matched) for(const prefix of ['','es/']){
+ const html=fs.readFileSync('dist/'+prefix+'government/'+(aliases[r.id]??r.id)+'/index.html','utf8');
+ assert(html.includes(new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(r.principal)),r.id);
+}
+console.log('Verified 3094 matched debt profiles in both languages; 225 unmatched debt records retained.');
