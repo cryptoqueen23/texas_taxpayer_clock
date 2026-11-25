@@ -51,7 +51,7 @@ assert.equal(unmatched.length,225);
 assert.equal(unmatched.reduce((s,r)=>s+r.principal,0),46273916218);
 for(const prefix of ['','es/']){
  const html=fs.readFileSync(path.join(root,prefix,'unmatched-debt/index.html'),'utf8');
- assert.equal((html.match(/<tbody>[\s\S]*?<\/tbody>/)?.[0].match(/<tr(?:\s|>)/g)||[]).length,unmatched.length);
+ assert.equal((html.match(/<tbody\b[^>]*>[\s\S]*?(?:<\/tbody>|<\/table>)/i)?.[0].match(/<tr\b[^>]*>/gi)||[]).length,unmatched.length,'Rendered unmatched debt rows');
  for(const r of unmatched)assert(html.includes(r.id),r.id);
  assert(html.includes('46,273,916,218'));
  assert(/<label[^>]*for="filter"/.test(html));
