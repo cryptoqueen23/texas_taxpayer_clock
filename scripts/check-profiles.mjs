@@ -71,3 +71,5 @@ const schoolLevies=JSON.parse(fs.readFileSync('public/data/school-levies-2021-20
 assert.deepEqual(Object.keys(schoolLevies.years).sort(),['2021','2022','2023','2024','2025']);
 for(const [year,rows] of Object.entries(schoolLevies.years)){assert.equal(Object.keys(rows).length,({'2021':1015,'2022':1014,'2023':1014,'2024':1013,'2025':1013})[year]);for(const [id,r] of Object.entries(rows)){assert(/^\d{3}-\d{3}-02$/.test(id));assert.equal(r.length,5);assert(typeof r[0]==='string');assert(r.slice(1).every(v=>v===null||Number.isFinite(v)));}}
 assert.equal(schoolLevies.years['2025']['050-910-02'][4],14511511);
+
+for(const prefix of ['','es/']) assert(fs.existsSync('dist/'+prefix+'school-rankings/index.html'));
