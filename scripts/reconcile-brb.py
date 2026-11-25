@@ -46,7 +46,7 @@ def reconcile(entity_id, year):
     return {"entity_id":entity_id,"year":year,"source_count":len(rows),"published_count":baseline["count"],"source_evidence":evidence,"count_evidence":count_evidence,"metrics":results,"all_match":all(r["matches"] for r in results.values()) and len(rows)==baseline["count"],"published_data_changed":False,"review_required":True}
 def inspect_school():
     where = "fiscalyear = 2025 AND (govid = '050-910-02' OR upper(governmentname) like '%COPPERAS COVE%')"
-    rows, evidence = fetch({"$where":where,"$select":"govid,governmentname,governmenttype,count(*) AS n","$group":"govid,governmentname,governmenttype","$limit":1000"})
+    rows, evidence = fetch({"$where":where,"$select":"govid,governmentname,governmenttype,count(*) AS n","$group":"govid,governmentname,governmenttype","$limit":1000})
     return {"query_results":rows,"evidence":evidence,"published_baseline_available":False,"review_required":True,"note":"Missing published debt row is not zero debt. Confirm identity and source coverage before reconciliation."}
 if __name__=="__main__":
     report = {"reports":[reconcile(entity_id,2025) for entity_id in ("050-101-03","050-000-00")], "school_discovery":inspect_school()}
