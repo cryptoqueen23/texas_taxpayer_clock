@@ -31,6 +31,16 @@ try{
    assert.equal(await page.locator('tbody tr').count(),44);
    await visit('household-burden/');
    assert(await page.locator('input').count()>0);
+   for(const route of ['household-burden/','unmatched-debt/','evidence/']){
+    await visit(route);
+    await page.keyboard.press('Tab');
+    assert.equal(await page.locator(':focus').getAttribute('href'),'#main-content');
+    await page.keyboard.press('Enter');
+    assert.equal(await page.locator(':focus').getAttribute('id'),'main-content');
+    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1),prefix+route+' horizontal page overflow');
+    const metrics=await page.evaluate(()=>{const n=performance.getEntriesByType('navigation')[0];return {loadMs:n.loadEventEnd,transferBytes:n.transferSize,resourceBytes:performance.getEntriesByType('resource').reduce((s,r)=>s+r.transferSize,0)}});
+    console.log(JSON.stringify({route:prefix+route,viewport:viewport.width,...metrics}));
+   }
   }
   assert.deepEqual(errors,[]);
   await page.close();
