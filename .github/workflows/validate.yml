@@ -26,6 +26,7 @@ jobs:
           path: npm-audit.json
       - run: npm run build
       - run: node scripts/check-profiles.mjs
+      - run: node scripts/check-site-quality.mjs
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
