@@ -1,0 +1,3 @@
+# Financial flag source transparency v1
+
+The comparison's tax-rate flags link to the Texas Comptroller property-tax rates dashboard agency reference in data/metadata/sources.json. Debt principal flags link to the Texas Bond Review Board home page agency reference in the same metadata. Both explicitly state that these are agency-level references, NOT verified document, year, page, tax-unit or row citations. Flag years and percentage calculations come from the locally staged public datasets. Source row/deep-link provenance is not yet available; do not label these links as proof of the specific figures. Manual source verification remains required before investigative publication. No payment functionality.
