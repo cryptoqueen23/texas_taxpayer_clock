@@ -1,0 +1,3 @@
+# Maintenance audit
+
+Daily 13:23 UTC Socrata sales tax metadata monitoring; Monday 14:47 UTC sales tax staging, reconciliation and review artifact. Both read-only. General acquire.py currently has no download_verified endpoints. Other financial datasets require manual source acquisition and validation. Added workflow summaries for success/failure and review status. No automatic publication, no external notification channel configured. Scheduled workflow execution and current artifact contents not independently confirmed in this audit. Review baseline path and downstream history/crosswalk before every sales tax release.

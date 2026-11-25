@@ -15,6 +15,15 @@ jobs:
         with:
           python-version: '3.12'
       - run: python scripts/monitor-sources.py
+      - name: Monitoring summary
+        if: always()
+        run: |
+          echo '## Official sales tax source monitoring' >> "$GITHUB_STEP_SUMMARY"
+          if [ -f source-monitor-report.json ]; then
+            python -c 'import json; d=json.load(open("source-monitor-report.json")); print("\\n".join("- "+s["name"]+": "+s["status"] for s in d["sources"]))' >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'No report generated; inspect workflow logs.' >> "$GITHUB_STEP_SUMMARY"
+          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:

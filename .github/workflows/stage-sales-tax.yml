@@ -18,6 +18,18 @@ jobs:
       - run: python scripts/stage-sales-tax.py
       - run: python scripts/normalize-sales-tax.py
       - run: python scripts/prepare-sales-tax-release.py
+      - name: Maintenance summary
+        if: always()
+        run: |
+          echo '## Sales tax staging (review only)' >> "$GITHUB_STEP_SUMMARY"
+          if [ -f staged-sales-tax/release-review.json ]; then
+            echo 'Candidate prepared; manual approval required.' >> "$GITHUB_STEP_SUMMARY"
+            echo '```json' >> "$GITHUB_STEP_SUMMARY"
+            cat staged-sales-tax/release-review.json >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'No release review generated. Inspect failed steps. Published data unchanged.' >> "$GITHUB_STEP_SUMMARY"
+          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
