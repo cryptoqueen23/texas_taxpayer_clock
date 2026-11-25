@@ -44,3 +44,9 @@ console.log('Verified 3094 matched debt profiles in both languages; 225 unmatche
 for(const prefix of ['','es/']) for(const route of ['debt','tax-rates']) assert(fs.existsSync('dist/'+prefix+route+'/index.html'));
 
 for(const prefix of ['','es/']) assert(fs.existsSync('dist/'+prefix+'calculator/index.html'));
+
+const hist=JSON.parse(fs.readFileSync('public/data/local-debt-history.json','utf8'));
+assert.deepEqual(hist.years,[2016,2017,2018,2019,2020,2021,2022,2023,2024,2025]);
+for(const r of debt.records) assert.deepEqual(hist.records[r.id]['2025'],[r.principal,r.interest,r.repayment,r.count],r.id);
+for(const years of Object.values(hist.records)) for(const [y,v] of Object.entries(years)){assert(hist.years.includes(Number(y)));assert.equal(v.length,4);assert(v.every(n=>Number.isSafeInteger(n)&&n>=0));}
+console.log('Historical dataset reconciled with FY2025 debt records');
