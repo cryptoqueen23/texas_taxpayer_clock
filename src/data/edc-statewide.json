@@ -1,0 +1,117 @@
+{
+  "source": "https://comptroller.texas.gov/transparency/reports/economic-development-corporation/exec-summary-2025.php",
+  "years": [
+    2024,
+    2025
+  ],
+  "corporations": [
+    713,
+    710
+  ],
+  "sources": [
+    [
+      "Sales tax",
+      "Impuesto sobre ventas",
+      1278108769,
+      1325696885
+    ],
+    [
+      "Grants and matching contributions",
+      "Subvenciones y aportaciones",
+      12658760,
+      24934369
+    ],
+    [
+      "Rental, lease and user fees",
+      "Alquileres y tarifas",
+      33571843,
+      33651325
+    ],
+    [
+      "Bond proceeds and loans",
+      "Bonos y préstamos",
+      77733623,
+      524802500
+    ],
+    [
+      "Other revenue",
+      "Otros ingresos",
+      274262291,
+      330392252
+    ],
+    [
+      "Reported total sources",
+      "Total de fuentes reportado",
+      1676335286,
+      2239477331
+    ]
+  ],
+  "uses": [
+    [
+      "Personnel",
+      "Personal",
+      103047229,
+      115192018
+    ],
+    [
+      "Administration",
+      "Administración",
+      112906515,
+      118073950
+    ],
+    [
+      "Marketing and promotion",
+      "Mercadeo y promoción",
+      42434710,
+      48908784
+    ],
+    [
+      "Direct business incentives",
+      "Incentivos empresariales directos",
+      273309482,
+      293409799
+    ],
+    [
+      "Job training",
+      "Capacitación laboral",
+      5089720,
+      9195820
+    ],
+    [
+      "Debt service",
+      "Servicio de deuda",
+      201200587,
+      208196049
+    ],
+    [
+      "Capital costs",
+      "Costos de capital",
+      384442032,
+      624421951
+    ],
+    [
+      "Affordable housing",
+      "Vivienda asequible",
+      1263243,
+      7185823
+    ],
+    [
+      "Payments to taxing units",
+      "Pagos a entidades tributarias",
+      47425483,
+      51899659
+    ],
+    [
+      "Other",
+      "Otros",
+      137009834,
+      306698229
+    ],
+    [
+      "Reported total expenditures",
+      "Total de gastos reportado",
+      1308128835,
+      1783182082
+    ]
+  ]
+}

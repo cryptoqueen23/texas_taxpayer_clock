@@ -80,3 +80,5 @@ const appraisal=JSON.parse(fs.readFileSync('public/data/appraisal-operations-202
 for(const y of ['2024','2025']){assert.equal(Object.keys(appraisal.years[y]).length,253);for(const row of Object.values(appraisal.years[y])){assert.equal(Object.keys(row).length,7);assert(Object.values(row).every(v=>v===null||Number.isFinite(v)));}}
 assert.equal(appraisal.years['2025'].Coryell.budget,1491786);
 for(const prefix of ['','es/'])assert(fs.existsSync('dist/'+prefix+'appraisal-districts/index.html'));
+
+for(const prefix of ['','es/'])assert(fs.existsSync('dist/'+prefix+'economic-development/index.html'));
