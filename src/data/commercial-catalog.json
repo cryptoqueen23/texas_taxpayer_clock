@@ -1,0 +1,28 @@
+{
+  "currency": "USD",
+  "status": "proposed",
+  "paymentsEnabled": false,
+  "offers": [
+    {
+      "id": "founding-supporter",
+      "priceCents": 4900,
+      "interval": "year",
+      "en": "Founding supporter",
+      "es": "Miembro fundador"
+    },
+    {
+      "id": "county-sponsor",
+      "priceCents": 15000,
+      "interval": "month",
+      "en": "County sponsorship (starting price)",
+      "es": "Patrocinio de condado (desde)"
+    },
+    {
+      "id": "custom-report",
+      "priceCents": 2900,
+      "interval": "one-time",
+      "en": "Custom financial report (starting price)",
+      "es": "Informe financiero personalizado (desde)"
+    }
+  ]
+}

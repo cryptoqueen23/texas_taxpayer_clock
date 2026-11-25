@@ -1,0 +1,3 @@
+# Commercial architecture — proposed
+
+Public data and existing tools remain free. Catalog prices are proposals, not approved offers. No checkout, collection of personal information, subscription, or payment processing is enabled. Future hosted checkout must use server-controlled prices, verified webhooks and idempotent fulfillment. No card data stored by this site. Before activation: confirm legal seller, jurisdiction, tax treatment, processor account, contact, terms, privacy, cancellation/refund policy, deliverables and data-use permissions. Sponsors cannot influence findings. Paid placements labeled; no sale of taxpayer data. Professional subscriptions deferred.
