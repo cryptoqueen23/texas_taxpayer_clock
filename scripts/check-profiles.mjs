@@ -22,7 +22,8 @@ for(const r of rows){
 for(const id of ['copperas-cove','copperas-cove-isd','austin','coryell-county']){
  const html=fs.readFileSync('dist/government/'+id+'/index.html','utf8');
  assert.equal((html.match(/<\/html>/g)||[]).length,1);
- assert(html.includes('Historical property tax rates'));
+ assert(html.includes(id==='copperas-cove-isd'?'School district calculated property tax levies':'Historical property tax rates'));
+ if(id==='copperas-cove-isd'){assert(html.includes('Pending verification'));assert(html.indexOf('First reported 2026 bond issuance')<html.indexOf('FY 2025 outstanding principal'));assert(!html.includes('Local sales tax allocations'));}
 }
 console.log('Verified '+rows.length*2+' bilingual profile routes; SHA256 '+crypto.createHash('sha256').update(raw).digest('hex'));
 
