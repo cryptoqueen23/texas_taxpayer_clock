@@ -57,3 +57,5 @@ assert.equal(denominators.fiscalYear,2025);assert.equal(denominators.sourceSha25
 const geo=JSON.parse(fs.readFileSync('public/data/texas-county-boundaries-2025.json','utf8'));assert.equal(geo.counties.length,254);assert.equal(new Set(geo.counties.map(c=>c.taxId)).size,254);for(const c of geo.counties){assert(ids.has(c.taxId));assert.match(c.fips,/^48\d{3}$/);assert(c.path.startsWith('M'));}for(const prefix of ['','es/'])assert(fs.existsSync('dist/'+prefix+'county-map/index.html'));
 
 for(const prefix of ['','es/'])assert(fs.existsSync('dist/'+prefix+'revenue/index.html'));
+
+const finances=JSON.parse(fs.readFileSync('public/data/texas-state-finances-2026.json','utf8'));assert.equal(finances.fiscalYear,2026);assert.equal(Object.keys(finances.historical).length,24);for(const rows of Object.values(finances.historical))for(const r of rows){assert.equal(r.monthly.length,12);assert(r.annual===null||Number.isFinite(r.annual));assert(r.monthly.every(v=>v===null||Number.isFinite(v)));}for(const prefix of ['','es/'])assert(fs.readFileSync('dist/'+prefix+'revenue/index.html','utf8').includes('213,724,395,531'));
