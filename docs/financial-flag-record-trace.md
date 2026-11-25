@@ -1,0 +1,3 @@
+# Financial review flag calculation trace v2
+
+Every >=20% adjacent-year property-tax rate or debt-principal flag includes a disclosure with government tax ID, earlier/later years, reported values, calculation and repository dataset path. The formula is (later-earlier)/earlier*100, rounded to one decimal; earlier value must be positive. Property tax rates from public/data/tax-units.json, historical principal from public/data/local-debt-history.json. These are traceable local dataset records, NOT independently verified primary source page/row citations. General Texas Comptroller and Bond Review Board agency links remain labeled as references. No payments or login.
