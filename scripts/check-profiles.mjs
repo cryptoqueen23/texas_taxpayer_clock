@@ -42,3 +42,5 @@ for(const r of matched) for(const prefix of ['','es/']){
 console.log('Verified 3094 matched debt profiles in both languages; 225 unmatched debt records retained.');
 
 for(const prefix of ['','es/']) for(const route of ['debt','tax-rates']) assert(fs.existsSync('dist/'+prefix+route+'/index.html'));
+
+for(const prefix of ['','es/']) assert(fs.existsSync('dist/'+prefix+'calculator/index.html'));
