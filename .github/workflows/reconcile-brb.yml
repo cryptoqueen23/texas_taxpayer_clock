@@ -7,6 +7,9 @@ on:
       - 'scripts/reconcile-brb.py'
       - 'scripts/test-reconcile-brb.py'
       - 'scripts/verify-brb-evidence.py'
+      - 'scripts/check-public-verification.py'
+      - 'src/components/FinancialEvidence.astro'
+      - 'public/data/local-debt-2025.json'
       - '.github/workflows/reconcile-brb.yml'
 permissions:
   contents: read
@@ -24,6 +27,7 @@ jobs:
       - run: python scripts/verify-brb-evidence.py --test
       - run: python scripts/reconcile-brb.py
       - run: python scripts/verify-brb-evidence.py
+      - run: python scripts/check-public-verification.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
