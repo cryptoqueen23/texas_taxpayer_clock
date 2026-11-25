@@ -111,3 +111,9 @@ assert.equal(pensionHistory.datasets.actuarial.fields[9],'Funded Ratio (Actuaria
 assert.equal(pensionHistory.datasets.actuarial.fields[16],'Actual Employer Contribution (% of Payroll)');
 const auditCensus=JSON.parse(fs.readFileSync('public/data/texas-census-local-finance-2022-2024.json','utf8'));
 assert(Object.values(auditCensus.years['2022']).some(r=>r.name==='COPPERAS COVE CITY'&&r.county==='Coryell'));
+
+// Statewide reconciliation: preserve both publication series.
+const auditLevies=JSON.parse(fs.readFileSync('src/data/property-levies.json','utf8'));
+for(const [year,total] of Object.entries({"2021":38946142782,"2022":43949038027,"2023":39500944744,"2024":41657752748,"2025":41654584549})) assert.equal(Object.values(schoolLevies.years[year]).reduce((s,r)=>s+(Number.isFinite(r[4])?r[4]:0),0),total);
+assert.equal(39500944744-auditLevies.rows[0][3],4363892);
+assert.equal(debt.records.reduce((s,r)=>s+r.repayment-r.principal-r.interest,0),-7);
