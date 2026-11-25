@@ -73,3 +73,5 @@ for(const [year,rows] of Object.entries(schoolLevies.years)){assert.equal(Object
 assert.equal(schoolLevies.years['2025']['050-910-02'][4],14511511);
 
 for(const prefix of ['','es/']) assert(fs.existsSync('dist/'+prefix+'school-rankings/index.html'));
+
+for(const prefix of ['','es/']) assert(fs.existsSync('dist/'+prefix+'school-spending/index.html'));
