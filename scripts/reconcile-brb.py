@@ -45,7 +45,7 @@ def reconcile(entity_id, year):
         results[metric] = {"source_total":str(total),"published":str(published),"difference":str(total-published),"matches":total==published}
     return {"entity_id":entity_id,"year":year,"source_count":len(rows),"published_count":baseline["count"],"source_evidence":evidence,"count_evidence":count_evidence,"metrics":results,"all_match":all(r["matches"] for r in results.values()) and len(rows)==baseline["count"],"published_data_changed":False,"review_required":True}
 if __name__=="__main__":
-    report = reconcile("050-101-03",2025)
+    report = {"reports":[reconcile(entity_id,2025) for entity_id in ("050-101-03","050-000-00")]}
     output = json.dumps(report,indent=2)
     (OUT/"report.json").write_text(output)
     print(output)
