@@ -31,7 +31,16 @@
         "recorded_original_sha256": "85d421d03db44e1f957c8ae26f053a0f929f2136bf7f19fcfdc0cbe6c3a969fb"
       },
       "comparison_source": "https://www.copperascovetx.gov/DocumentCenter/View/5120/Annual-Comprehensive-Financial-Report-2025-PDF",
-      "comparison_note": "City fiscal year ends September 30; BRB August 31. Do not equate balances without scope/date bridge."
+      "comparison_note": "City fiscal year ends September 30; BRB August 31. Do not equate balances without scope/date bridge.",
+      "reconciliation_run": {
+        "url": "https://github.com/cryptoqueen23/texas_taxpayer_clock/actions/runs/45716338505",
+        "artifact_url": "https://github.com/cryptoqueen23/texas_taxpayer_clock/actions/runs/45716338505/artifacts/15069214018",
+        "source_sha256": "0b61170916688a6bb629bbd4af4417107e17b173c98e010b21389ce1b9fa69bc",
+        "retrieved_at": "2026-11-25T22:48:41.184875+00:00",
+        "source_total": 110305000,
+        "difference": 0,
+        "review_required": true
+      }
     },
     {
       "id": "pilot-1-2025-interest",
@@ -63,7 +72,16 @@
         "recorded_original_sha256": "85d421d03db44e1f957c8ae26f053a0f929f2136bf7f19fcfdc0cbe6c3a969fb"
       },
       "comparison_source": "https://www.copperascovetx.gov/DocumentCenter/View/5120/Annual-Comprehensive-Financial-Report-2025-PDF",
-      "comparison_note": "City fiscal year ends September 30; BRB August 31. Do not equate balances without scope/date bridge."
+      "comparison_note": "City fiscal year ends September 30; BRB August 31. Do not equate balances without scope/date bridge.",
+      "reconciliation_run": {
+        "url": "https://github.com/cryptoqueen23/texas_taxpayer_clock/actions/runs/45716338505",
+        "artifact_url": "https://github.com/cryptoqueen23/texas_taxpayer_clock/actions/runs/45716338505/artifacts/15069214018",
+        "source_sha256": "0b61170916688a6bb629bbd4af4417107e17b173c98e010b21389ce1b9fa69bc",
+        "retrieved_at": "2026-11-25T22:48:41.184875+00:00",
+        "source_total": 37189495,
+        "difference": 0,
+        "review_required": true
+      }
     },
     {
       "id": "pilot-1-2025-repayment",
@@ -95,12 +113,21 @@
         "recorded_original_sha256": "85d421d03db44e1f957c8ae26f053a0f929f2136bf7f19fcfdc0cbe6c3a969fb"
       },
       "comparison_source": "https://www.copperascovetx.gov/DocumentCenter/View/5120/Annual-Comprehensive-Financial-Report-2025-PDF",
-      "comparison_note": "City fiscal year ends September 30; BRB August 31. Do not equate balances without scope/date bridge."
+      "comparison_note": "City fiscal year ends September 30; BRB August 31. Do not equate balances without scope/date bridge.",
+      "reconciliation_run": {
+        "url": "https://github.com/cryptoqueen23/texas_taxpayer_clock/actions/runs/45716338505",
+        "artifact_url": "https://github.com/cryptoqueen23/texas_taxpayer_clock/actions/runs/45716338505/artifacts/15069214018",
+        "source_sha256": "0b61170916688a6bb629bbd4af4417107e17b173c98e010b21389ce1b9fa69bc",
+        "retrieved_at": "2026-11-25T22:48:41.184875+00:00",
+        "source_total": 147494495,
+        "difference": 0,
+        "review_required": true
+      }
     },
     {
       "id": "pilot-2-2025-principal",
       "entity": "Coryell County",
-      "entity_id": null,
+      "entity_id": "050-000-00",
       "metric": "principal",
       "period": "FY2025",
       "unit": "USD",
@@ -114,17 +141,22 @@
       "locator": null,
       "scope": null,
       "reported_value": null,
-      "published_value": null,
+      "published_value": 6385000,
       "recalculated_value": null,
       "formula": null,
       "difference": null,
       "reviewer": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "site_evidence": {
+        "path": "public/data/local-debt-2025.json",
+        "locator": "records[id=050-000-00].principal",
+        "issuance_count": 2
+      }
     },
     {
       "id": "pilot-2-2025-interest",
       "entity": "Coryell County",
-      "entity_id": null,
+      "entity_id": "050-000-00",
       "metric": "interest",
       "period": "FY2025",
       "unit": "USD",
@@ -138,17 +170,22 @@
       "locator": null,
       "scope": null,
       "reported_value": null,
-      "published_value": null,
+      "published_value": 665405,
       "recalculated_value": null,
       "formula": null,
       "difference": null,
       "reviewer": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "site_evidence": {
+        "path": "public/data/local-debt-2025.json",
+        "locator": "records[id=050-000-00].interest",
+        "issuance_count": 2
+      }
     },
     {
       "id": "pilot-2-2025-repayment",
       "entity": "Coryell County",
-      "entity_id": null,
+      "entity_id": "050-000-00",
       "metric": "repayment",
       "period": "FY2025",
       "unit": "USD",
@@ -162,12 +199,17 @@
       "locator": null,
       "scope": null,
       "reported_value": null,
-      "published_value": null,
+      "published_value": 7050405,
       "recalculated_value": null,
       "formula": null,
       "difference": null,
       "reviewer": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "site_evidence": {
+        "path": "public/data/local-debt-2025.json",
+        "locator": "records[id=050-000-00].repayment",
+        "issuance_count": 2
+      }
     },
     {
       "id": "pilot-3-2025-principal",
