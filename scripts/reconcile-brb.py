@@ -47,7 +47,8 @@ def reconcile(entity_id, year):
 def inspect_school():
     where = "fiscalyear = 2025 AND (govid = '050-910-02' OR upper(governmentname) like '%COPPERAS COVE%')"
     rows, evidence = fetch({"$where":where,"$select":"govid,governmentname,governmenttype,count(*) AS n","$group":"govid,governmentname,governmenttype","$limit":1000})
-    return {"query_results":rows,"evidence":evidence,"published_baseline_available":False,"review_required":True,"note":"Missing published debt row is not zero debt. Confirm identity and source coverage before reconciliation."}
+    historical, historical_evidence = fetch({"$where":"(govid = '050-910-02' OR upper(governmentname) like '%COPPERAS COVE%') AND fiscalyear >= 2020","$select":"fiscalyear,govid,governmentname,governmenttype,count(*) AS n","$group":"fiscalyear,govid,governmentname,governmenttype","$limit":1000})
+    return {"historical_results":historical,"historical_evidence":historical_evidence,"query_results":rows,"evidence":evidence,"published_baseline_available":False,"review_required":True,"note":"Missing published debt row is not zero debt. Confirm identity and source coverage before reconciliation."}
 if __name__=="__main__":
     report = {"reports":[reconcile(entity_id,2025) for entity_id in ("050-101-03","050-000-00")], "school_discovery":inspect_school()}
     output = json.dumps(report,indent=2)
