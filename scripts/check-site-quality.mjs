@@ -20,3 +20,25 @@ for(const lang of ['en','es'])for(const route of routes){
  checked++;
 }
 console.log(JSON.stringify({checked,errors},null,2));assert.equal(errors.length,0,'Static route quality checks failed');
+
+// Comparison regression checks: both locale pages, accessible controls, mobile layout and honest missing-data labels.
+for(const lang of ['en','es']){
+ const p=path.join(root,lang==='es'?'es/compare/index.html':'compare/index.html');
+ const html=fs.readFileSync(p,'utf8');
+ for(const [label,pattern] of Object.entries({
+  searchLabel:/<label[^>]*for="search"/,
+  searchInput:/<input[^>]*id="search"/,
+  resultsRegion:/id="results"[^>]*role="region"/,
+  selectedRegion:/id="chosen"[^>]*aria-live="polite"/,
+  responsiveCards:/grid-template-columns:repeat\(auto-fit/,
+  missingData:/Not reported|No reportado/,
+  perResident:/Debt principal per resident|Principal de deuda por residente/,
+  historicalTrend:/Reported debt principal trend|Tendencia del principal/,
+  profileLinks:/government\//,
+  noCheckout:/<form[^>]*action=["'][^"']*(?:paypal|stripe|zelle)/i
+ })){
+  if(label==='noCheckout'){if(pattern.test(html))throw new Error(lang+' compare contains payment form');}
+  else if(!pattern.test(html))throw new Error(lang+' compare missing '+label);
+ }
+}
+console.log('Bilingual comparison regression checks passed');
