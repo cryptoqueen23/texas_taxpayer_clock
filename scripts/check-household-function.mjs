@@ -1,0 +1,7 @@
+import fs from 'node:fs';
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+const src=fs.readFileSync('src/components/HouseholdBurden.astro','utf8').split('<script define:vars={{es}}>')[1].split('</script>')[0];
+const nodes=new Map();let valid=true;const get=id=>{if(!nodes.has(id))nodes.set(id,{value:'',valueAsNumber:NaN,textContent:'—',handlers:{},addEventListener(k,f){this.handlers[k]=f},checkValidity(){return valid}});return nodes.get(id)};
+for(const es of [false,true]){nodes.clear();valid=true;vm.runInNewContext(src,{document:{getElementById:get},es});const form=get('calc');const put=(id,v)=>{get(id).value=String(v);get(id).valueAsNumber=v};form.handlers.input();assert.equal(get('annual').textContent,'—');put('v0',250000);put('r0',0.7);put('v1',200000);put('r1',0.5);put('spend',20000);put('sales',8.25);put('fees',100);put('income',70000);form.handlers.input();assert.equal(get('property').textContent,'$2,750.00');assert.equal(get('annual').textContent,'$5,600.00');assert.equal(get('monthly').textContent,'$466.67');assert.equal(get('daily').textContent,'$15.34');assert.equal(get('share').textContent,'8.00%');valid=false;form.handlers.input();assert.equal(get('annual').textContent,'—');valid=true;form.handlers.input();form.handlers.reset();assert.equal(get('annual').textContent,'—');}
+console.log('Household calculator script: both language modes, blank, calculation, invalid input and reset passed');
