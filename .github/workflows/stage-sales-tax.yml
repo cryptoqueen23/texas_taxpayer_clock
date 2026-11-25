@@ -30,6 +30,9 @@ jobs:
           else
             echo 'No release review generated. Inspect failed steps. Published data unchanged.' >> "$GITHUB_STEP_SUMMARY"
           fi
+      - name: Summarize release review
+        if: always()
+        run: python scripts/summarize-maintenance.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
