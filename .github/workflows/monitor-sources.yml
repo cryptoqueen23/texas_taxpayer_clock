@@ -14,6 +14,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - run: python scripts/acquisition-readiness.py
       - run: python scripts/monitor-sources.py
       - name: Monitoring summary
         if: always()
@@ -28,5 +29,7 @@ jobs:
         if: always()
         with:
           name: official-source-monitor
-          path: source-monitor-report.json
+          path: |
+            source-monitor-report.json
+            acquisition-readiness.json
           retention-days: 90
