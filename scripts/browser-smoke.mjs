@@ -29,6 +29,20 @@ try{
    await visit('evidence/');
    assert((await page.locator('main').innerText()).includes('365,500,296,028'));
    assert.equal(await page.locator('tbody tr').count(),44);
+   const evidence=page.locator('article[aria-labelledby="source-verification"]');
+   assert(await evidence.isVisible());
+   const values=await evidence.locator('dd').allTextContents();
+   assert.deepEqual(values.slice(0,5),['17,718','3,319 / 3,319','9,957 / 9,957','0','$0 / $0 / $0']);
+   assert((await evidence.innerText()).includes(prefix?'revisión formal de evidencia pendiente':'formal evidence review pending'));
+   assert((await evidence.innerText()).includes(prefix?'no todos los pasivos ni los saldos actuales':'not all liabilities or current balances'));
+   assert.equal(await evidence.locator('a[href^="https://data.texas.gov/resource/3qmf-seku.json?"]').count(),1);
+   assert.equal(await evidence.locator('a[href="https://github.com/cryptoqueen23/texas_taxpayer_clock/actions/runs/45720435751"]').count(),1);
+   assert.equal(await evidence.locator('a[href$="/artifacts/15071308340"]').count(),1);
+   assert.match(await evidence.locator('code').innerText(),/^[a-f0-9]{64}$/);
+   await page.locator('nav a[href="'+(prefix?'/evidence/':'/es/evidence/')+'"]').click();
+   assert.equal(await page.locator('html').getAttribute('lang'),prefix?'en':'es');
+   await visit('evidence/');
+   console.log('Public evidence browser checks passed: '+(prefix?'es':'en')+' '+viewport.width);
    await visit('household-burden/');
    assert(await page.locator('input').count()>0);
    for(const route of ['household-burden/','unmatched-debt/','evidence/']){
