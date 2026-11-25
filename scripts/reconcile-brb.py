@@ -101,3 +101,5 @@ if __name__=="__main__":
     output = json.dumps(report,indent=2)
     (OUT/"report.json").write_text(output)
     print(output)
+    if not report["statewide"]["all_match"] or not all(r["all_match"] for r in report["reports"]):
+        raise SystemExit("Financial reconciliation mismatch; review saved evidence before release")
