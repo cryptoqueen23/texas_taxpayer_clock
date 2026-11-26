@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - audit/phase-19
+      - audit/phase-20
 permissions:
   contents: read
 jobs:
