@@ -1,0 +1,20 @@
+---
+import DataFreshness from './DataFreshness.astro';
+const {lang}=Astro.props;
+const es=lang==='es',t=(a:string,b:string)=>es?b:a;
+const base=es?'/es':'';
+const sources=[
+['Texas Bond Review Board',t('State debt','Deuda estatal'),'https://data.brb.texas.gov/state/'],
+['Texas Bond Review Board',t('Local debt','Deuda local'),'https://data.brb.texas.gov/local/'],
+['Texas Open Data',t('Local debt by issuance','Deuda local por emisión'),'https://data.texas.gov/api/views/3qmf-seku.json'],
+['Texas Bond Review Board',t('Debt affordability study','Estudio de capacidad de deuda'),'https://www.brb.texas.gov/wp-content/uploads/2026/04/DAS2026.pdf'],
+['Texas Bond Review Board',t('2025 local debt annual report','Informe anual de deuda local 2025'),'https://www.brb.texas.gov/wp-content/uploads/2026/02/2025LocalARFinal.pdf'],
+['Texas Comptroller',t('Property tax rates and levies','Tasas y gravámenes de propiedad'),'https://comptroller.texas.gov/taxes/property-tax/rates/index.php'],
+['Texas Comptroller',t('2022–2023 property tax report · Exhibits 1 and 9','Informe de propiedad 2022–2023 · Cuadros 1 y 9'),'https://comptroller.texas.gov/taxes/property-tax/docs/96-1728-22-23.pdf'],
+['Texas Comptroller',t('Annual cash report','Informe anual de efectivo'),'https://comptroller.texas.gov/transparency/reports/cash-report/'],
+['Texas Open Data',t('Local sales tax allocations','Asignaciones locales de ventas'),'https://data.texas.gov/api/views/53pa-m7sm.json']
+];
+---
+<!doctype html><html lang={lang}><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>{t('Sources & Data Library','Biblioteca de fuentes y datos')} | Texas Taxpayer Clock</title><style is:inline>
+*{box-sizing:border-box}body{margin:0;background:#081526;color:#f4f6fa;font:1rem/1.55 system-ui}main,header{max-width:1100px;margin:auto;padding:1rem}header{display:flex;gap:1rem;flex-wrap:wrap;border-bottom:1px solid #42536a}a,h1,h2{color:#e1bd75}a:focus-visible{outline:3px solid white;outline-offset:3px}h1{font-size:clamp(2rem,5vw,3rem)}section{margin:2rem 0}.library{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:.75rem}article{background:#142740;border:1px solid #42536a;border-radius:10px;padding:1rem;min-width:0;overflow-wrap:anywhere}article h3{font-size:1rem;margin:0 0 .5rem}article strong,article small,article a{display:block}small{color:#c4cfdd}.skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;background:#081526;padding:1rem}
+</style></head><body><a class="skip" href="#main">{t('Skip to content','Saltar al contenido')}</a><header><a href={base+'/'}>Texas Taxpayer Clock</a><a href="/sources/" lang="en">English</a><a href="/es/sources/" lang="es">Español</a></header><main id="main" tabindex="-1"><h1>{t('Sources & Data Library','Biblioteca de fuentes y datos')}</h1><p>{t('Trace the published figures to their government sources. Reporting periods differ; missing figures are not zero.','Consulte las fuentes gubernamentales de las cifras publicadas. Los períodos difieren; los datos faltantes no son cero.')}</p><section><h2>{t('Official financial sources','Fuentes financieras oficiales')}</h2><div class="library">{sources.map(([agency,label,url])=><article><small>{agency}</small><h3><a href={url}>{label}</a></h3></article>)}</div></section><section><h2>{t('Verification and methodology','Verificación y metodología')}</h2><div class="library"><article><h3><a href={base+'/evidence/'}>{t('Financial evidence and reconciliation','Evidencia financiera y conciliación')}</a></h3><p>{t('Calculations, documented comparisons, unresolved differences and evidence records.','Cálculos, comparaciones documentadas, diferencias pendientes y registros de evidencia.')}</p></article><article><h3><a href={base+'/methodology/'}>{t('Methodology, limitations and corrections','Metodología, limitaciones y correcciones')}</a></h3><p>{t('Definitions, modeling assumptions and interpretation.','Definiciones, supuestos de modelos e interpretación.')}</p></article></div></section><DataFreshness lang={lang}/></main></body></html>
