@@ -63,6 +63,15 @@ const cards=[{name:t('Property tax levies','Gravámenes sobre propiedades'),valu
 /* Keep the Capitol visible above the headline on narrow screens. */
 @media(max-width:700px){.hero,.hero-art{min-height:620px}.hero-art img{position:absolute;top:0;left:0;height:380px;object-fit:cover;object-position:center 42%}.hero-art:after{background:linear-gradient(0deg,#081526 0%,#081526 38%,#08152600 75%)}.hero-copy{align-self:end;padding:1rem}.hero-motion{height:380px}}
 @media(max-width:700px){.hero-art img{object-fit:contain;object-position:center top;filter:none}.hero-art:after{background:linear-gradient(0deg,#081526 0%,#081526 38%,transparent 65%)}}.hero-art img{filter:none}.hero-stream{opacity:.4}
+/* Visible cinematic movement across the artwork, without moving text. */
+.hero-art img{animation:capitol-cinematic 12s ease-in-out infinite alternate;transform-origin:50% 35%}
+.hero-haze{background:linear-gradient(115deg,transparent 25%,#a9c7ed35 47%,transparent 65%);animation:capitol-sweep 7s ease-in-out infinite;mix-blend-mode:screen}
+.hero-glow{background:radial-gradient(ellipse at 50% 42%,#ffc66b55,transparent 48%);animation:hero-pulse 4s ease-in-out infinite alternate}
+.hero-stream{display:none}
+.hero-art[data-paused="true"] img{animation-play-state:paused}
+@keyframes capitol-cinematic{from{transform:scale(1)}to{transform:scale(1.09)}}
+@keyframes capitol-sweep{0%{transform:translateX(-75%)}100%{transform:translateX(75%)}}
+@media(prefers-reduced-motion:reduce){.hero-art img{animation:none}}
 </style></head><body>
 <a class="skip" href="#main">{t('Skip to content','Ir al contenido')}</a>
 <header><a class="brand" href={es?'/es/':'/'}><img src="/images/texas-clock.svg" alt="" width="38" height="38"/> <span>TEXAS TAXPAYER CLOCK</span></a><nav aria-label={t('Language','Idioma')}><a href="/" lang="en" aria-label="English">🇺🇸 EN</a> · <a href="/es/" lang="es" aria-label="Español">🇵🇷 ES</a></nav><details><summary aria-label={t('Navigation menu','Menú de navegación')}><span aria-hidden="true">☰</span></summary><a href="#taxes">{t('Taxes','Impuestos')}</a><a href="#debt">{t('Debt','Deuda')}</a><a href="#explorer">{t("Government explorer","Explorador de gobiernos")}</a><a href="#data-freshness">{t("Data freshness","Vigencia de datos")}</a><a href="#sources">{t('Sources','Fuentes')}</a></details></header>
