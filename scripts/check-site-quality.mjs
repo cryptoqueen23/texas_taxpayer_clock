@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 const root=path.resolve('dist');
-const routes=['','revenue','debt','tax-rates','calculator','county-map','local-sales-tax','local-sales-tax-history','government/copperas-cove','government/copperas-cove-isd','government/coryell-county','school-rankings','school-spending','appraisal-districts','economic-development','edc-history','local-finances','pensions','household-burden','methodology','support','watchlist','compare','unmatched-debt','evidence'];
+const routes=['','revenue','debt','tax-rates','calculator','county-map','local-sales-tax','local-sales-tax-history','government/copperas-cove','government/copperas-cove-isd','government/coryell-county','school-rankings','school-spending','appraisal-districts','economic-development','edc-history','local-finances','pensions','household-burden','methodology','support','watchlist','compare','unmatched-debt','evidence','sources'];
 let checked=0;const errors=[];
 for(const lang of ['en','es'])for(const route of routes){
  const relative=[lang==='es'?'es':'',route].filter(Boolean).join('/');
@@ -65,3 +65,6 @@ for(const prefix of ['','es/']){
  assert(fs.readFileSync(path.join(root,prefix,'index.html'),'utf8').includes('/'+prefix+'evidence/'));
 }
 console.log('Bilingual financial evidence checks passed');
+
+for(const prefix of ['','es/']){const home=fs.readFileSync(path.join(root,prefix,'index.html'),'utf8');const library=fs.readFileSync(path.join(root,prefix,'sources/index.html'),'utf8');assert(home.includes('/'+prefix+'sources/'));assert(library.includes('id="data-freshness"'));assert(library.includes('/'+prefix+'evidence/'));assert(!home.includes('id="data-freshness"'));}
+console.log('Bilingual source library navigation passed');
