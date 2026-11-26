@@ -60,6 +60,8 @@ const cards=[{name:t('Property tax levies','Gravámenes sobre propiedades'),valu
 .hero-copy .hero-debt{font-size:clamp(1.4rem,4vw,2.5rem);font-weight:800;color:#f4d18c;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;margin:.65rem 0 0}
 .hero-copy .hero-debt-label{font-size:.8rem;color:#e1e8f2}
 @media(max-width:700px){.hero,.hero-art{min-height:500px}.hero-art img{object-position:center top}.hero-copy{padding:1rem}.hero-art:after{background:linear-gradient(0deg,#081526 0%,#081526f5 26%,#08152655 62%,transparent 85%)}}
+/* Keep the Capitol visible above the headline on narrow screens. */
+@media(max-width:700px){.hero,.hero-art{min-height:620px}.hero-art img{position:absolute;top:0;left:0;height:380px;object-fit:cover;object-position:center 42%}.hero-art:after{background:linear-gradient(0deg,#081526 0%,#081526 38%,#08152600 75%)}.hero-copy{align-self:end;padding:1rem}.hero-motion{height:380px}}
 </style></head><body>
 <a class="skip" href="#main">{t('Skip to content','Ir al contenido')}</a>
 <header><a class="brand" href={es?'/es/':'/'}><img src="/images/texas-clock.svg" alt="" width="38" height="38"/> <span>TEXAS TAXPAYER CLOCK</span></a><nav aria-label={t('Language','Idioma')}><a href="/" lang="en" aria-label="English">🇺🇸 EN</a> · <a href="/es/" lang="es" aria-label="Español">🇵🇷 ES</a></nav><details><summary aria-label={t('Navigation menu','Menú de navegación')}><span aria-hidden="true">☰</span></summary><a href="#taxes">{t('Taxes','Impuestos')}</a><a href="#debt">{t('Debt','Deuda')}</a><a href="#explorer">{t("Government explorer","Explorador de gobiernos")}</a><a href="#data-freshness">{t("Data freshness","Vigencia de datos")}</a><a href="#sources">{t('Sources','Fuentes')}</a></details></header>
